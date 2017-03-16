@@ -5,11 +5,13 @@ var mongoose = require('mongoose');   //mongoose for mongoDB
 var morgan = require('morgan');       //Log requests to the console (Express 4)
 var bodyParser = require('body-parser');  //Pull information from HTML POST (Express 4)
 var methodOverride = require('method-override');  // Simulate Delete and Put (Express 4)
+var path = require('path');
 
 // Configuration =================
 
 
-app.use(express.static(__dirname + '/public')); //  set the static files location /public/img will be /img for users
+console.log(path.join(__dirname, '../../client/public'));
+app.use(express.static(path.join(__dirname, '../../client/public'))); //  set the static files location /public/img will be /img for users
 app.use(morgan('dev')); //log every request to the console
 app.use(bodyParser.urlencoded({'extended':'true'})); // parse application/x-www-form-urlencoded
 app.use(bodyParser.json()); // parse application/json
