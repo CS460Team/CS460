@@ -2,7 +2,7 @@
   'use strict';
   angular
     .module('app.calendar')
-    .controller('CalendarViewCtrl',[CalendarViewController]);
+    .controller('CalendarViewCtrl',['$scope','$element','$attrs',CalendarViewController]);
 
 
 
@@ -29,13 +29,17 @@
         vm.count = 0;
         vm.currentYear = 2017;
 
+        vm.selectedID = 1;
+        vm.setSelected = setSelected;
+
         vm.previous = previous;       //Changes the calendar Month to the previous
         vm.next = next;               //Changes calendar month to next month
         vm.getMaxDays = getMaxDays;   //Gets the max number of days for the current Month
-        vm.select = select;
+
 
         var thirtyDays = [3,5,8,10];
 
+        console.log("Initial Selected ID: " + vm.selectedID);
 
         function getMaxDays(){
           console.log("Executing getMaxDays()");
@@ -86,9 +90,11 @@
            console.log("currentMonth After next() = " + vm.currentMonth);
          }
 
-         function select(day){
+         function setSelected(id){
            console.log("You clicked me");
-           console.log("Day Number is " + day);
+
+           vm.selectedID = id;
+           console.log("selectedID is " + vm.selectedID);
          }
 
     }

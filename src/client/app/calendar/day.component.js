@@ -7,6 +7,7 @@
       controller: 'DayCtrl',
       bindings: {
         dayNumber: '<',
+        selectedDay: '<',
         onSelect: '&'
       }
     });
