@@ -1,0 +1,41 @@
+<style>
+  </style>
+
+<div class="container">
+  <!-- <p>Event Name: {{$ctrl.events.name}}</p>
+  <p>Location: {{$ctrl.events.location}}</p>
+  <p>Time Start: {{$ctrl.events.start}}</p>
+  <p>Time End: {{$ctrl.events.end}}</p>
+  <p>Details: {{$ctrl.events.details}}</p> -->
+<!--
+<p ng-repeat = "name in $ctrl.name">{{name}}</p>
+<p ng-repeat = "date in $ctrl.date">{{date}}</p>
+<p ng-repeat = "location in $ctrl.location">{{location}}</p>
+<p ng-repeat = "start in $ctrl.start">{{start}}</p>
+<p ng-repeat = "end in $ctrl.end">{{end}}</p>
+<p ng-repeat = "details in $ctrl.details">{{details}}</p> -->
+
+<button type="button" class="btn btn-primary" data-toggle="modal"
+  data-target="#myModal">View Event</button>
+
+  <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Event Name</h4>
+          </div>
+          <div class="modal-body">
+            <p ng-repeat = "event1 in $ctrl.event1">{{event1}}</p>
+            <br>
+            <br>
+            <p ng-repeat = "event2 in $ctrl.event2">{{event2}}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>

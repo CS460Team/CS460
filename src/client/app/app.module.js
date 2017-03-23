@@ -5,7 +5,8 @@
     /*This array contains the modules that
     the core app module depends on*/
     'ngRoute',
-    'app.calendar'
+    'app.calendar',
+    'app.event'
   ]);
 
 })();
