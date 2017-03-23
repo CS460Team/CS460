@@ -6,5 +6,6 @@
     .component('calendarView', {
       templateUrl: 'app/calendar/calendar.template.html',
       controller: 'CalendarViewCtrl'
+
     });
 })();

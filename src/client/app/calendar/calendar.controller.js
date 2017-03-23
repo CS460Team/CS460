@@ -2,13 +2,13 @@
   'use strict';
   angular
     .module('app.calendar')
-    .controller('CalendarViewCtrl',[CalendarViewController]);
+    .controller('CalendarViewCtrl',['$scope','$element','$attrs',CalendarViewController]);
 
 
 
 
 
-    function CalendarViewController(){
+    function CalendarViewController($scope, $element, $attrs){
       var vm = this;
        vm.days = ['Sun','Mon','Tue','Wed','Thur','Fri','Sat'];
        vm.months = [
@@ -27,17 +27,75 @@
         vm.currentMonth = 7; //August
         vm.monthDays = 31;
         vm.count = 0;
-        for(var x in [3,5,8,10]){
-          if(vm.currentMonth === x){
-            vm.monthDays = 30;
-            break;
+        vm.currentYear = 2017;
+
+        vm.selectedID = 1;
+        vm.setSelected = setSelected;
+
+        vm.previous = previous;       //Changes the calendar Month to the previous
+        vm.next = next;               //Changes calendar month to next month
+        vm.getMaxDays = getMaxDays;   //Gets the max number of days for the current Month
+
+
+        var thirtyDays = [3,5,8,10];
+
+        console.log("Initial Selected ID: " + vm.selectedID);
+
+        function getMaxDays(){
+          console.log("Executing getMaxDays()");
+          if (vm.currentMonth === 1) {
+            vm.monthDays = 28;
+            return;
+           }
+          for(var x = 0; x < thirtyDays.length; x++){
+            console.log("x value = " + x);
+            console.log("currentMonth value = " + vm.currentMonth);
+            if(vm.currentMonth === thirtyDays[x]){
+              console.log("I am in the if statement in the for loop in getMaxDays()");
+              console.log("x value = " + x);
+              console.log("currentMonth value = " + vm.currentMonth);
+              vm.monthDays = 30;
+              return;
+            }
           }
+          vm.monthDays = 31;
+          return;
+
+
         }
 
-        if (vm.currentMonth === 1) {
-          vm.monthDays = 28;
+
+         function previous(){
+           console.log("curentMonth Before previous() = " + vm.currentMonth);
+           if (vm.currentMonth === 0){
+             vm.currentMonth=11;
+             vm.currentYear--;
+           }
+           else {
+             vm.currentMonth = vm.currentMonth - 1;
+           }
+           console.log("currentMonth After previous() = " + vm.currentMonth);
          }
 
+
+         function next(){
+           console.log("curentMonth Before next() = " + vm.currentMonth);
+           if (vm.currentMonth === 11) {
+             vm.currentMonth=0;
+             vm.currentYear++;
+           }
+           else {
+             vm.currentMonth = vm.currentMonth + 1;
+           }
+           console.log("currentMonth After next() = " + vm.currentMonth);
+         }
+
+         function setSelected(id){
+           console.log("You clicked me");
+
+           vm.selectedID = id;
+           console.log("selectedID is " + vm.selectedID);
+         }
 
     }
 })();

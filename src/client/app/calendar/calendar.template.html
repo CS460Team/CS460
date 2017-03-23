@@ -1,5 +1,4 @@
-    <style>
-        </style>
+
 
 
 
@@ -8,13 +7,14 @@
     <div class="row">
         <div class="col-sm-8">
             <header>
-                <button>«</button>
+                <button ng-click="$ctrl.previous(); $ctrl.getMaxDays();">«</button>
                 <h2>{{$ctrl.months[$ctrl.currentMonth]}}</h2>
-                <button>»</button>
+                <h2>{{$ctrl.currentYear}}</h2>
+                <button ng-click="$ctrl.next(); $ctrl.getMaxDays();">»</button>
             </header>
             <table>
                 <tr>
-                    <td ng-repeat="day in $ctrl.days">{{day}}</td>
+                    <td ng-repeat="dayName in $ctrl.days">{{dayName}}</td>
                     <!-- <td>Mon</td>
                     <td>Tue</td>
                     <td>Wed</td>
@@ -23,7 +23,9 @@
                     <td>Sat</td> -->
                 </tr>
                 <tr ng-repeat="weekNum in [1,2,3,4,5]">
-                    <td ng-repeat="dayNum in [1,2,3,4,5,6,7]" ng-hide="(weekNum-1)*7+dayNum > $ctrl.monthDays">{{(weekNum -1)*7 + dayNum}}</td>
+                    <td  ng-repeat="dayNum in [1,2,3,4,5,6,7]" ng-hide="(weekNum - 1) * 7 + dayNum > $ctrl.monthDays" >
+                        <day   on-select="$ctrl.setSelected(day)" selected-day="$ctrl.selectedID"  day-number="(weekNum - 1) * 7 + dayNum"></day>
+                    </td>
                 </tr>
                     <!-- <td></td>
                     <td></td>
