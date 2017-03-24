@@ -10,42 +10,44 @@
 
     function CalendarViewController($scope, $element, $attrs){
 
-      var date = new Date();
-      var day = date.getDay();
-      var month = date.getMonth();
-      var year = date.getFullYear();
+      // Indecies of months with only 30 days
+      var thirtyDays = [3,5,8,10];
 
       var vm = this;
-       vm.days = ['Sun','Mon','Tue','Wed','Thur','Fri','Sat'];
-       vm.months = [
-         'January',
-         'February',
-         'March',
-         'April',
-         'May',
-         'June',
-         'July',
-         'August',
-         'September',
-         'October',
-         'November',
-         'December'];
+
+      // Instance Variables Intialization
         vm.currentMonth = 7; //August
         vm.monthDays = 31;
         vm.count = 0;
         vm.currentYear = 2017;
         vm.startDay = new Date(vm.currentYear,vm.currentMonth,1).getDay();
-
         vm.selectedID = 1;
         vm.setSelected = setSelected;
+        vm.days = ['Sun','Mon','Tue','Wed','Thur','Fri','Sat'];
+        vm.months = [
+          'January',
+          'February',
+          'March',
+          'April',
+          'May',
+          'June',
+          'July',
+          'August',
+          'September',
+          'October',
+          'November',
+          'December'];
 
+
+
+        // Instance methods initalization
         vm.previous = previous;       //Changes the calendar Month to the previous
         vm.next = next;               //Changes calendar month to next month
         vm.getMaxDays = getMaxDays;   //Gets the max number of days for the current Month
         vm.isInvalidDate = isInvalidDate;
         vm.calculateDate = calculateDate;
 
-        var thirtyDays = [3,5,8,10];
+
 
         console.log("Initial Selected ID: " + vm.selectedID);
 
@@ -53,27 +55,25 @@
         // the value of the current month and the current year (In case of leap year)
         function getMaxDays(){
           console.log("Executing getMaxDays()");
-          if (vm.currentMonth === 1) {
-            if (isLeapYear(vm.currentYear)){
+          switch (vm.currentMonth){
+            case 1:
+              if (isLeapYear(vm.currentYear)){
               vm.monthDays = 29;
-              return;
+              break;
             }
-            vm.monthDays = 28;
-            return;
-           }
-          for(var x = 0; x < thirtyDays.length; x++){
-            console.log("x value = " + x);
-            console.log("currentMonth value = " + vm.currentMonth);
-            if(vm.currentMonth === thirtyDays[x]){
-              console.log("I am in the if statement in the for loop in getMaxDays()");
-              console.log("x value = " + x);
-              console.log("currentMonth value = " + vm.currentMonth);
+              vm.monthDays = 28;
+              break;
+            case 3:
+            case 5:
+            case 8:
+            case 10:
               vm.monthDays = 30;
-              return;
-            }
+              break;
+            default:
+              vm.monthDays = 31;
           }
-          vm.monthDays = 31;
-          return;
+
+
 
 
         }
@@ -118,6 +118,7 @@
 
          // isInvalidDate takes the weekNumber and dayNumber and checks to make sure the day is within the valid range for the current month
          function isInvalidDate(dateEntry){
+           console.log("Date Entry passed in: " + dateEntry);
            return dateEntry <= 0 || dateEntry > vm.monthDays;
          }
 
