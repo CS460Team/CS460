@@ -9,6 +9,12 @@
 
 
     function CalendarViewController($scope, $element, $attrs){
+
+      var date = new Date();
+      var day = date.getDay();
+      var month = date.getMonth();
+      var year = date.getFullYear();
+
       var vm = this;
        vm.days = ['Sun','Mon','Tue','Wed','Thur','Fri','Sat'];
        vm.months = [
@@ -28,6 +34,7 @@
         vm.monthDays = 31;
         vm.count = 0;
         vm.currentYear = 2017;
+        vm.startDay = new Date(vm.currentYear,vm.currentMonth,1).getDay(); 
 
         vm.selectedID = 1;
         vm.setSelected = setSelected;
@@ -74,6 +81,7 @@
            else {
              vm.currentMonth = vm.currentMonth - 1;
            }
+           vm.startDay = new Date(vm.currentYear,vm.currentMonth,1).getDay();
            console.log("currentMonth After previous() = " + vm.currentMonth);
          }
 
@@ -87,6 +95,7 @@
            else {
              vm.currentMonth = vm.currentMonth + 1;
            }
+           vm.startDay = new Date(vm.currentYear,vm.currentMonth,1).getDay();
            console.log("currentMonth After next() = " + vm.currentMonth);
          }
 
