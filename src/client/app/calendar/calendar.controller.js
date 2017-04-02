@@ -10,8 +10,7 @@
 
     function CalendarViewController($scope, $element, $attrs){
 
-      // Indecies of months with only 30 days
-      var thirtyDays = [3,5,8,10];
+      
 
       var vm = this;
 
