@@ -1,4 +1,4 @@
-function EditFieldController($scope, $element, $attrs) {
+function EditableFieldController($scope, $element, $attrs) {
   var ctrl = this;
   ctrl.editMode = false;
 
@@ -25,9 +25,9 @@ function EditFieldController($scope, $element, $attrs) {
   };
 }
 
-angular.module('app.event').component('editField', {
-  templateUrl: 'app/event/editField.html',
-  controller: EditFieldController,
+angular.module('app.event').component('editableField', {
+  templateUrl: 'app/event/editableField.html',
+  controller: EditableFieldController,
   bindings: {
     fieldValue: '<',
     fieldType: '@?',

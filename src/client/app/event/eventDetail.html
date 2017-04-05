@@ -1,17 +1,21 @@
 <div>
-  Name: <edit-field field-value="$ctrl.event.name" field-type="text"
-    on-update="$ctrl.update('name', value)"></edit-field><br>
-  Date: <edit-field field-value="$ctrl.event.date" field-type="text"
-    on-update="$ctrl.update('date', value)"></edit-field><br>
-  Location: <edit-field field-value="$ctrl.event.location" field-type="text"
-    on-update="$ctrl.update('location', value)"></edit-field><br>
-  Start: <edit-field field-value="$ctrl.event.start" field-type="text"
-    on-update="$ctrl.update('start', value)"></edit-field><br>
-  End: <edit-field field-value="$ctrl.event.end" field-type="text"
-    on-update="$ctrl.update('end', value)"></edit-field><br>
-  Details: <edit-field field-value="$ctrl.event.details" field-type="text"
-    on-update="$ctrl.update('details', value)"></edit-field><br>
+  Name: <editable-field field-value="$ctrl.event.name" field-type="text"
+    on-update="$ctrl.update('name', value)"></editable-field><br>
+  Date: <editable-field field-value="$ctrl.event.date" field-type="date"
+    on-update="$ctrl.update('date', value)"></editable-field><br>
+  Location: <editable-field field-value="$ctrl.event.location" field-type="text"
+    on-update="$ctrl.update('location', value)"></editable-field><br>
+  Start: <editable-field field-value="$ctrl.event.start" field-type="time"
+    on-update="$ctrl.update('start', value)"></editable-field><br>
+  End: <editable-field field-value="$ctrl.event.end" field-type="time"
+    on-update="$ctrl.update('end', value)"></editable-field><br>
+  Details: <editable-field field-value="$ctrl.event.details" field-type="text"
+    on-update="$ctrl.update('details', value)"></editable-field><br>
 <br>
 <br>
+
+
+
   <button ng-click="$ctrl.delete()">Delete</button>
+  <button ng-click="$ctrl.update()">Edit</button>
 </div>
