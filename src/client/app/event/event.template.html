@@ -23,19 +23,28 @@
 
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title">Event Name</h4>
+            <h4 class="modal-title">Events</h4>
+            <button id="close-btn" type="button" class="btn btn-default pull-right"
+              data-dismiss="modal">Close</button>
           </div>
           <div class="modal-body">
-            <p ng-repeat = "event1 in $ctrl.event1">{{event1}}</p>
-            <br>
-            <br>
-            <p ng-repeat = "event2 in $ctrl.event2">{{event2}}</p>
+              <event-detail ng-repeat="event in $ctrl.list" event="event"
+              on-delete="$ctrl.deleteEvent(event)" on-update="$ctrl.updateEvent(event, prop, value)">
+            </event-detail>
+            <!-- <p ng-repeat = "event1 in $ctrl.event1">{{event1}}</p> -->
+            <!-- Name: {{$ctrl.event1.name}}
+            Date: {{$ctrl.event1.date}}
+            Location: {{$ctrl.event1.location}}
+            Start Date: {{$ctrl.event1.start}}
+            End Date: {{$ctrl.event1.end}}
+            Details: {{$ctrl.event1.details}} -->
+            <!-- <br>
+            <br> -->
+            <!-- <p ng-repeat = "event2 in $ctrl.event2">{{event2}}</p> -->
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
     </div>
-
 </div>
