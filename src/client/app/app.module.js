@@ -6,7 +6,8 @@
     the core app module depends on*/
     'ngRoute',
     'app.calendar',
-    'app.event'
+    'app.event',
+    'app.core'
   ]);
 
 })();

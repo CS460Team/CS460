@@ -10,9 +10,13 @@ module.exports = function(app){
     if (req.query.date){
         events.findMonth(req,res);
     }
-    events.findAll(req,res);
+    else{
+      events.findAll(req,res);
+    }
+
 
   });
+  app.get('/api/events/:startdate-:enddate', events.findRange);
   //app.get('/api/events/:eventId', getEventById);
 
 

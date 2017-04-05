@@ -10,17 +10,18 @@
 
     function CalendarViewController($scope, $element, $attrs){
 
-      
+
 
       var vm = this;
 
       // Instance Variables Intialization
         vm.currentMonth = 7; //August
-        vm.monthDays = 31;
+        vm.monthDays = 31; //Total days in the month
         vm.count = 0;
-        vm.currentYear = 2017;
-        vm.startDay = new Date(vm.currentYear,vm.currentMonth,1).getDay();
-        vm.selectedID = 1;
+        vm.currentYear = 2017; //current year
+        vm.startDay = new Date(vm.currentYear,vm.currentMonth,1).getDay(); //Day of week month starts on
+        vm.selectedID = new Date(vm.currentYear,vm.currentMonth,1);
+        vm.selectedDay = vm.selectedID.getDate();
         vm.setSelected = setSelected;
         vm.days = ['Sun','Mon','Tue','Wed','Thur','Fri','Sat'];
         vm.months = [
@@ -91,6 +92,8 @@
            }
            vm.startDay = new Date(vm.currentYear,vm.currentMonth,1).getDay();
            console.log("currentMonth After previous() = " + vm.currentMonth);
+           vm.selectedID.setMonth(vm.currentMonth);
+           $scope.$broadcast('selectedIDChanged');
          }
 
          // next is essentially the same as previous method but increments instead of decrementing
@@ -105,19 +108,26 @@
            }
            vm.startDay = new Date(vm.currentYear,vm.currentMonth,1).getDay();
            console.log("currentMonth After next() = " + vm.currentMonth);
+           vm.selectedID.setMonth(vm.currentMonth);
+           $scope.$broadcast('selectedIDChanged');
          }
 
          // setSelected is a simple setter for determing which day in UI is selected
          function setSelected(id){
            console.log("You clicked me");
 
-           vm.selectedID = id;
+           vm.selectedID.setDate(id);
+           vm.selectedID.setMonth(vm.currentMonth);
+           vm.selectedID.setYear(vm.currentYear);
+           vm.selectedDay = vm.selectedID.getDate();
+           $scope.$broadcast('selectedIDChanged');
            console.log("selectedID is " + vm.selectedID);
+           console.log("selectedDay of month: " + vm.selectedDay);
          }
 
          // isInvalidDate takes the weekNumber and dayNumber and checks to make sure the day is within the valid range for the current month
          function isInvalidDate(dateEntry){
-           console.log("Date Entry passed in: " + dateEntry);
+           //console.log("Date Entry passed in: " + dateEntry);
            return dateEntry <= 0 || dateEntry > vm.monthDays;
          }
 
