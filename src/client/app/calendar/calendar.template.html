@@ -22,9 +22,9 @@
                     <td>Fri</td>
                     <td>Sat</td> -->
                 </tr>
-                <tr ng-repeat="weekNum in [1,2,3,4,5]">
-                    <td  ng-repeat="dayNum in [1,2,3,4,5,6,7]" ng-hide="(weekNum - 1) * 7 + dayNum > $ctrl.monthDays" >
-                        <day   on-select="$ctrl.setSelected(day)" selected-day="$ctrl.selectedID"  day-number="(weekNum - 1) * 7 + dayNum"></day>
+                <tr ng-repeat="weekNum in [1,2,3,4,5,6]">
+                    <td  ng-repeat="dayNum in [1,2,3,4,5,6,7]"   >
+                        <day ng-hide="$ctrl.isInvalidDate($ctrl.calculateDate(weekNum,dayNum))"  on-select="$ctrl.setSelected(day)" selected-day="$ctrl.selectedID"  day-number="$ctrl.calculateDate(weekNum,dayNum)"></day>
                     </td>
                 </tr>
                     <!-- <td></td>
