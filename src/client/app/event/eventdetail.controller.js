@@ -11,7 +11,7 @@ function EventDetailController() {
 }
 
 angular.module('app.event').component('eventDetail', {
-  templateUrl: 'app/event/eventDetail.html',
+  templateUrl: 'app/event/eventdetail.template.html',
   controller: EventDetailController,
   bindings: {
     event: '<',
