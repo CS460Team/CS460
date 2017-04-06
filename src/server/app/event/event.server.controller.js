@@ -26,6 +26,24 @@ exports.findMonth = function(req, res){
     });
 };
 
+exports.findRange = function(req, res){
+  console.log('Given startdate value: ' + req.params.startdate);
+  var startdate = new Date(parseInt(req.params.startdate,10));
+  var enddate = new Date(parseInt(req.params.enddate,10));
+  Event
+    .find({
+      startDate: {$gte: startdate, $lte: enddate}
+    }, function(err, events){
+      if (err){
+        res.send(err);
+      }
+      else{
+        res.json(events);
+      }
+
+    });
+};
+
 // Callback function for creating a new event
 exports.create = function(req, res){
 

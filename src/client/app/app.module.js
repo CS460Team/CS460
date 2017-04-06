@@ -7,7 +7,8 @@
     'ngRoute',
     'app.calendar',
     'app.event',
-    'xeditable'
+    'xeditable',
+    'app.core'
   ]);
 
 })();

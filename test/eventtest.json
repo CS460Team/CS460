@@ -2,5 +2,16 @@
   "title": "Test",
   "location":"Bentley",
   "notes":"This is a test",
-  "endDate": 1491091459047
+  "endDate": "12-31-2017"
+}
+
+{
+  "title": "Stringvalue",
+  "location":"StringValue",
+  "notes":"StringValue",
+  "dateCreated":"SomeDateValue Optional Value",
+  "dateUpdated":"SomeDateValue Optional Value",
+  "notes":"Some String Value",
+  "startDate": "Some Date Value Optional Value",
+  "endDate": "Some Date Value or Integer Required"
 }
