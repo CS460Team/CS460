@@ -1,5 +1,5 @@
 <div>
-  Name: <editable-field field-value="$ctrl.event.name" field-type="text"
+  <!-- Name: <editable-field field-value="$ctrl.event.name" field-type="text"
     on-update="$ctrl.update('name', value)"></editable-field><br>
   Date: <editable-field field-value="$ctrl.event.date" field-type="date"
     on-update="$ctrl.update('date', value)"></editable-field><br>
@@ -12,10 +12,32 @@
   Details: <editable-field field-value="$ctrl.event.details" field-type="text"
     on-update="$ctrl.update('details', value)"></editable-field><br>
 <br>
+<br> -->
 <br>
 
+Event Name: <a href="#" editable-text="name">{{ $ctrl.event.name || "empty"}}</a>
+  <br>
+Date: <a href="#" editable-text="date">{{ $ctrl.event.start || "empty"}}</a>
+  <br>
+Location: <a href="#" editable-text="location">{{ $ctrl.event.location || "empty"}}</a>
+  <br>
+Start time: <a href="#" editable-text="start">{{ $ctrl.event.start || "empty"}}</a>
+  <br>
+End time: <a href="#" editable-text="end">{{ $ctrl.event.end || "empty"}}</a>
+  <br>
+Details: <a href="#" editable-text="details">{{ $ctrl.event.details || "empty"}}</a>
 
+<br>
+<br>
 
-  <button ng-click="$ctrl.delete()">Delete</button>
-  <button ng-click="$ctrl.update()">Edit</button>
+<button id="deleteBtn" ng-click="$ctrl.delete()">Delete</button>
+
+<style>
+#deleteBtn {
+  position: relative;
+  right: 20;
+  bottom: 20;
+}
+</style>
+
 </div>
