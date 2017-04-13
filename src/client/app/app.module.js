@@ -8,7 +8,8 @@
     'app.calendar',
     'app.event',
     'app.core',
-    'app.newEventView'
+    'app.newEventView',
+    'xeditable'
   ]);
 
 })();
