@@ -28,6 +28,7 @@ exports.findMonth = function(req, res){
 
 exports.findRange = function(req, res){
   console.log('Given startdate value: ' + req.params.startdate);
+
   var startdate = new Date(parseInt(req.params.startdate,10));
   var enddate = new Date(parseInt(req.params.enddate,10));
   Event
@@ -35,9 +36,11 @@ exports.findRange = function(req, res){
       startDate: {$gte: startdate, $lte: enddate}
     }, function(err, events){
       if (err){
+        console.log("Error occured during DB Query");
         res.send(err);
       }
       else{
+        console.log("Found records succesfully");
         res.json(events);
       }
 
@@ -73,7 +76,10 @@ exports.create = function(req, res){
           res.send(err);
         }
 
-        res.json(events);
+        else{
+          res.json(events);
+        }
+
       });
   });
 };

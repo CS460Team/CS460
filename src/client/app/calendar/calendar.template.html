@@ -15,23 +15,22 @@
             <table>
                 <tr>
                     <td ng-repeat="dayName in $ctrl.days">{{dayName}}</td>
-                    <!-- <td>Mon</td>
-                    <td>Tue</td>
-                    <td>Wed</td>
-                    <td>Thu</td>
-                    <td>Fri</td>
-                    <td>Sat</td> -->
+                    
                 </tr>
                 <tr ng-repeat="weekNum in [1,2,3,4,5,6]">
                     <td  ng-repeat="dayNum in [1,2,3,4,5,6,7]"   >
                         <day ng-hide="$ctrl.isInvalidDate($ctrl.calculateDate(weekNum,dayNum))"  on-select="$ctrl.setSelected(day)" selected-day="$ctrl.selectedDay"  day-number="$ctrl.calculateDate(weekNum,dayNum)"></day>
                     </td>
                 </tr>
-                    
+
             </table>
         </div>
 
       <task-view active-date="$ctrl.selectedID"></task-view>
 
+    </div>
+    <br>
+    <div >
+      <new-event></new-event>
     </div>
 </div>

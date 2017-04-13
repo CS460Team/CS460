@@ -10,6 +10,7 @@
     vm.startdate = new Date();
     vm.enddate = new Date(vm.startdate.getFullYear(),vm.startdate.getMonth(),vm.startdate.getDate()+7);
     vm.initalize = activate;
+    vm.deleteEvent = deleteEvent;
     $scope.$on('selectedIDChanged',function(event,args){
       activate();
     });
@@ -33,6 +34,14 @@
         vm.weekEvents = data;
         return vm.weekEvents;
       });
+    }
+
+    // Delete's the clicked on Event from the database 
+    function deleteEvent(event){
+      console.log("You double clicked on: " + event);
+
+      dataservice.deleteEvent(event);
+      activate();
     }
   }
 })();

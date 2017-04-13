@@ -7,7 +7,8 @@
     'ngRoute',
     'app.calendar',
     'app.event',
-    'app.core'
+    'app.core',
+    'app.newEventView'
   ]);
 
 })();

@@ -9,6 +9,8 @@
 
     //service to be returned
     var service = {
+      createEvent: createEvent,
+      deleteEvent: deleteEvent,
       getWeekEvents: getWeekEvents,
       getMonthEvents: getMonthEvents,
       getEvents: getEvents,
@@ -16,6 +18,37 @@
     };
 
     return service;
+
+    // Saves a new event to the database
+    function createEvent(event){
+      $http.post('api/events/',event)
+      .then(function successCallback(response){
+        console.log('Successfully saved to database');
+        return response.data;
+      },
+      function errorCallback(response){
+        console.log('Error occured');
+        console.log('Status code' + response.status);
+        console.log('Response data: ' + response.data);
+      }
+    );
+    }
+
+    function deleteEvent(event){
+      console.log(event._id);
+      $http.delete('api/events/'+event._id)
+      .then(function successCallback(response){
+        console.log('Event Successfully deleted');
+        return response.data;
+      },
+        function errorCallback(response){
+            console.log('Error occured');
+            console.log('Status code' + response.status);
+            console.log('Response data: ' + response.data);
+            return response.data;
+    }
+    );
+    }
 
     //Returns all Events for particular week
     function getWeekEvents(startdate,enddate){

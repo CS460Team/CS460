@@ -1,0 +1,22 @@
+<div class="">
+  <form novalidate name="form" class="new-event-form">
+    <label>Title: <input type="text" ng-model="event.title"></label><br>
+    <label>Start Date: <input type="datetime-local" ng-model="event.startDate" required></label><br>
+
+    <label>End Date: <input type="datetime-local" ng-model="event.endDate" required></label><br>
+
+    <label>Location: <input type="text" ng-model="event.location"></label><br>
+    <label>Notes: <textarea ng-model="event.notes" rows="8" cols="80"></textarea></label><br>
+
+    <br>
+    <label>DateTime <input type="datetime-local"></label>
+    <br>
+
+    <input type="button" ng-click="reset(form)" value="Reset">
+    <input type="submit" ng-click="update(event)" value="Save">
+    <input type="button" ng-click="close()" value="Close">
+
+  </form>
+
+  <pre>event = {{event | json}}</pre>
+</div>
