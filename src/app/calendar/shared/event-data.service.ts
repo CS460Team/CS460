@@ -36,8 +36,8 @@ export class EventDataService {
     }
 
     addEvent(newEvent: CalendarEvent): Promise<CalendarEvent>{
-        let headers = new Headers({'Content-Type':'application/json'});
-        let options = new RequestOptions({headers: headers});
+        const headers = new Headers({'Content-Type': 'application/json'});
+        const options = new RequestOptions({headers: headers});
 
         return this.http.post(this.eventUrl, JSON.stringify(newEvent), options)
                 .toPromise()

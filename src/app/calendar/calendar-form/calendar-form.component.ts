@@ -47,7 +47,7 @@ export class CalendarFormComponent {
             startDate: this.model.start,
             endDate: this.model.end
 
-        }
+        };
         this.addEvent(event);
 
         // TODO: Make a data service that sends the model to Database

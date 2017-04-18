@@ -8,7 +8,7 @@ import { CalendarModule } from './calendar/calendar.module';
 
 @NgModule({
   declarations: [
-    AppComponent 
+    AppComponent
   ],
   imports: [
     BrowserModule,

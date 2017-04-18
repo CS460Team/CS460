@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { CalendarService } from './shared/calendar.service';
-import { ActiveDate } from './shared/activeDate';
+
 
 const days: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
@@ -25,15 +25,15 @@ const months: string[] = [
     templateUrl: './calendar.component.html'
 })
 export class CalendarComponent implements OnInit {
-    
-    
+
+
     startDay: number;
     currentMonth: number;
     currentYear: number;
     totalDays: number;
     days: string[];
     months: string[];
-    
+
 
     constructor(private calendarService: CalendarService) {}
 
@@ -41,14 +41,14 @@ export class CalendarComponent implements OnInit {
         this.days = days;
         this.months = months;
         this.calendarService.selectedDate = this.calendarService.today;
-        
+
         this.currentMonth = this.calendarService.today.getMonth();
         this.currentYear = this.calendarService.today.getFullYear();
         // Sets the display date to the first of the month
-        this.calendarService.displayDate = new Date(this.currentYear, this.currentMonth); 
+        this.calendarService.displayDate = new Date(this.currentYear, this.currentMonth);
         // sets the total days for the month to be the last day of the month
         this.totalDays = new Date(this.currentYear, this.currentMonth + 1, 0).getDate();
-        
+
         this.startDay = this.calendarService.displayDate.getDay();
     }
 
@@ -77,10 +77,10 @@ export class CalendarComponent implements OnInit {
         this.currentMonth = this.calendarService.displayDate.getMonth();
         this.currentYear = this.calendarService.displayDate.getFullYear();
         // Sets the display date to the first of the month
-        this.calendarService.displayDate = new Date(this.currentYear, this.currentMonth); 
+        this.calendarService.displayDate = new Date(this.currentYear, this.currentMonth);
         // sets the total days for the month to be the last day of the month
         this.totalDays = new Date(this.currentYear, this.currentMonth + 1, 0).getDate();
-        
+
         this.startDay = this.calendarService.displayDate.getDay();
    }
 
@@ -93,10 +93,10 @@ export class CalendarComponent implements OnInit {
         this.calendarService.selectedDate.setMonth(currentMonth);
         this.calendarService.selectedDate.setFullYear(currentYear);
         console.log('calendar component: selectedDate = ' + this.calendarService.selectedDate);
-       
+
     }
 
-   
 
-   
+
+
 }
