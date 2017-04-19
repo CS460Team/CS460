@@ -1,1 +1,54 @@
 /* You can add global styles to this file, and also import other style files */
+html, body {
+  width: 100%;
+  font-family: Arial;
+  margin: 0;
+  padding: 0;
+}
+
+h2 {
+  margin: 0;
+  padding: 0;
+  padding-left: 10%;
+}
+
+h2.month {
+  font-family: "Arial Black";
+}
+
+h2.year {
+  font-size: 40px;
+}
+
+table {
+  width: 80%;
+  margin: auto;
+}
+
+td {
+  border: 1px solid grey;
+  font-size: 12px;
+  padding-left: .5%;
+  padding-bottom: 2.5%;
+
+}
+
+th {
+  text-align: center;
+}
+
+.row td:nth-child(1), td:nth-child(2), td:nth-child(3), td:nth-child(4), td:nth-child(5), td:nth-child(6), td:nth-child(7){
+  width: 15%;
+  height: 50px;
+}
+
+button.btn {
+  margin-left: 10%;
+  background-color: #99E1D9;
+}
+
+.sidebar {
+  float: right;
+  width: 25%;
+  background-color: pink;
+}
