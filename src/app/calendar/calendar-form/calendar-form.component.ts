@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { OnChanges, SimpleChanges } from '@angular/core';
 
 import { CalendarEvent } from '../shared/calendar-event';
 import { CalendarService } from '../shared/calendar.service';
@@ -11,46 +12,48 @@ import { EventDataService } from '../shared/event-data.service';
 export class CalendarFormComponent {
     model: CalendarEvent = new CalendarEvent();
 
+    changelog: string[] = [];
 
-    constructor(private calendarService: CalendarService, private dataService: EventDataService){}
 
-    public addEvent(eventDetails): void{
+    constructor(private calendarService: CalendarService, private dataService: EventDataService) {
+
+    }
+
+    public logModel(): void {
+        console.log(this.model);
+    }
+
+   
+    public addEvent(eventDetails): void {
         this.dataService.addEvent(eventDetails)
-        .then((calEvent: CalendarEvent) => console.log('Post successful: ', calEvent))
-        .catch((error: any) => console.error('An error occured: ', error));
+            .then((calEvent: CalendarEvent) => console.log('Post successful: ', calEvent))
+            .catch((error: any) => console.error('An error occured: ', error));
     }
 
     public onSubmit(calendarForm: NgForm): void {
 
-        const selectedDate: number = this.calendarService.selectedDate.getDate();
-        const selectedYear: number = this.calendarService.selectedDate.getFullYear();
-        const selectedMonth: number = this.calendarService.selectedDate.getMonth();
-        const selectedStartTime: string = calendarForm.value.startTime as string;
-        const startHour: number = parseInt(selectedStartTime.substring(0, selectedStartTime.indexOf(':')), 10);
-        const startMin: number = parseInt(selectedStartTime.substring(selectedStartTime.indexOf(':') + 1), 10);
-        const startTime: Date =  new Date(selectedYear, selectedMonth, selectedDate, startHour, startMin);
-        console.log('calendar-form Component: startTime = ' + startTime);
+        let calEvent: {
+            title: string,
+            location: string,
+            notes: string,
+            startDate: Date,
+            endDate: Date
+        }
 
 
-        const selectedEndTime: string = calendarForm.value.endTime as string;
-        const endHour: number = parseInt(selectedEndTime.substring(0, selectedEndTime.indexOf(':')), 10);
-        const endMin: number = parseInt(selectedEndTime.substring(selectedEndTime.indexOf(':') + 1), 10);
-        const endTime: Date =  new Date(selectedYear, selectedMonth, selectedDate, endHour, endMin);
 
-        this.model.start = startTime;
-        this.model.end = endTime;
-
-        const event = {
+        calEvent = {
             title: this.model.title,
             location: '',
             notes: this.model.notes,
-            startDate: this.model.start,
-            endDate: this.model.end
+            startDate: new Date(this.model.startDate + " " + this.model.startTime),
+            endDate: new Date(this.model.endDate + " " + this.model.endTime)
 
         };
-        this.addEvent(event);
+        console.log(calEvent);
+        //this.addEvent(calEvent); //UNCOMMENT THIS WHEN DONE DEBUGGING
 
-        // TODO: Make a data service that sends the model to Database
+        // Done TODO: Make a data service that sends the model to Database
         // TODO: After model has been saved to the Database form values should be reset with calendarForm.reset()
     }
 }
