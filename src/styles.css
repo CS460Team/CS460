@@ -26,14 +26,15 @@ table {
 }
 
 td {
-  border: 1px solid grey;
-  font-size: 12px;
-  
-
+  border: 1px solid lightgrey;
+  font-size: 11px;
+  padding-left: .5%;
+  padding-bottom: 3%;
 }
 
 th {
   text-align: center;
+  padding-top: 15px;
 }
 
 .row td:nth-child(1), td:nth-child(2), td:nth-child(3), td:nth-child(4), td:nth-child(5), td:nth-child(6), td:nth-child(7){
@@ -42,16 +43,24 @@ th {
 }
 
 button.btn {
-  margin-left: 10%;
   background-color: #99E1D9;
+  font-weight: bold;
+}
+
+#nextBtn {
+  margin-right:10%;
+}
+
+#prevBtn {
+  margin-right: 2%;
+}
+
+h2.year, button.btn {
+  display: inline-block;
 }
 
 .sidebar {
   float: right;
   width: 25%;
   background-color: pink;
-}
-.day-container {
-  
-  height: 100%;
 }

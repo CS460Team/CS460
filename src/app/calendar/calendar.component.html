@@ -2,8 +2,8 @@
     <header>
         <h2 class="month">{{months[calendarService.displayDate.getMonth()]}}</h2>
         <h2 class="year">{{calendarService.displayDate.getFullYear()}}</h2>
-        <button class="btn" (click)=prevMonth()>&lt;</button>
-        <button class="btn" (click)=nextMonth()>&gt;</button>
+        <button id="nextBtn" class="btn pull-right" (click)=nextMonth()>&gt;</button>
+        <button id="prevBtn" class="btn pull-right" (click)=prevMonth()>&lt;</button> 
     </header>
 
     <table>
