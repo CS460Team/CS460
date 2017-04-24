@@ -28,8 +28,7 @@ table {
 td {
   border: 1px solid grey;
   font-size: 12px;
-  padding-left: .5%;
-  padding-bottom: 2.5%;
+  
 
 }
 
@@ -51,4 +50,8 @@ button.btn {
   float: right;
   width: 25%;
   background-color: pink;
+}
+.day-container {
+  
+  height: 100%;
 }
