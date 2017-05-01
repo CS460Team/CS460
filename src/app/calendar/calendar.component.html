@@ -9,16 +9,25 @@
     <table>
         <thead class="row"><th class="" *ngFor="let day of days">{{day}}</th></thead>
         <tr class="row" *ngFor="let week of [1,2,3,4,5,6]">
-            <td class="" *ngFor="let date of [1,2,3,4,5,6,7]">
-                <div #dateElement (click) = "selectDay(+(dateElement.innerText))" *ngIf="isValidDate(calculateDate(week, date))">
+            <td  class=""   *ngFor="let date of [1,2,3,4,5,6,7]">
+                <div class="day-container" #dateElement (click) = "selectDay(+(dateElement.innerText))"  *ngIf="isValidDate(calculateDate(week, date))">
                 {{calculateDate(week, date)}}
                 </div>
                 </td>
         </tr>
 
     </table>
+
 </div>
 
+<div class="sidebar">
+  <!-- <span style="float:right; display:inline; position:relative;"> -->
+      <app-event-list [weekEvents]="weekEvents | async" [selectedDate]="selectedDate"></app-event-list>
+  <!-- </span> -->
+</div>
+
+
+<!--
 <div class="create-form">
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
     Create Event
@@ -41,10 +50,13 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
+<div class="form">
+  <calendar-form></calendar-form>
 </div>
-<!--
-<div class="sidebar">
-  <span style="float:right; display:inline; position:relative;">TODO: Build View to display events for the week</span>
-</div> -->
+
+     <div>
+        <p>TODO: Remove This</p>
+        <p>Calendar Component SelectedDate: {{selectedDate}}</p>
+     </div>

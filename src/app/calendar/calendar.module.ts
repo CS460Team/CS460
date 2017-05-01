@@ -7,11 +7,12 @@ import { CalendarFormModule } from './calendar-form/calendar-form.module';
 
 import {CalendarService} from './shared/calendar.service';
 import { EventDataService } from './shared/event-data.service';
+import { EventListComponent } from './event-list/event-list.component';
 
 // TODO: Create an Events view component (maybe module?) to display events;
 
 @NgModule({
-    declarations: [CalendarComponent],
+    declarations: [CalendarComponent, EventListComponent],
     imports: [
     CommonModule,
     CalendarFormModule,
