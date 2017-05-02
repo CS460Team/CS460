@@ -3,7 +3,7 @@ html, body {
   width: 100%;
   font-family: Arial;
   margin-left: 10px;
-  margin-right:10px;
+  margin-right: 10px;
   padding: 0;
 }
 
@@ -70,10 +70,23 @@ h2.year, button.btn {
   margin-top: 35px;
   margin-right: 10%;
   height: 300px;
+  border-radius: 8px 8px 8px 8px;
+}
+
+.start {
+  float: left;
+  width: 50%;
+}
+
+.end {
+  float:right;
+  width: 50%;
+  padding-right: 10%;
 }
 
 .form {
   padding-top: 375px;
+  margin-left: 5%;
 }
 
 .thisweek {
@@ -84,4 +97,18 @@ h2.year, button.btn {
 
 .form-control {
   width: 35%;
+}
+
+label {
+  margin-right: 10px;
+  float: left;
+  padding-top: 5px;
+}
+
+legend {
+  margin-top: 20px;
+}
+
+textarea {
+  margin-top: 20px;
 }
