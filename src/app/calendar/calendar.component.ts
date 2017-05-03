@@ -40,25 +40,25 @@ export class CalendarComponent implements OnInit, AfterViewInit {
     totalDays: number;      // The total number of days in the displaying month
     days: string[];         // A constant string array representing the names for the days of the week
     months: string[];       // A constant string Array representing the names for the months
-    
+
     selectedDate: Date;     // The currently selected Date as a full date object
 
     weekEvents: Promise<CalendarEvent[]>;
-    
+
     allEvents: CalendarEvent[];
 
 
     constructor(private calendarService: CalendarService, private dataService: EventDataService) {}
 
     /**On initialization this component subscripes to the Observable for monitoring selected Dates
-     * It initializes all instance variables to their appropriate values. It also initializes the 
+     * It initializes all instance variables to their appropriate values. It also initializes the
      * service's displayDate to be the month that should be on display to the user
      */
     ngOnInit(): void {
         console.log('Calendar component: Initialization in process');
         this.days = days;
         this.months = months;
-        
+
         // ----------------Observable Initialization --------------------
         // This initalization block tells the observable to take any values
         // added to the stream (E.g. The date selected by the user) and set
@@ -102,7 +102,7 @@ export class CalendarComponent implements OnInit, AfterViewInit {
         return day <= this.totalDays && day > 0;
     }
 
-    /** calculateDate is a method for displaying the correct date in table format 
+    /** calculateDate is a method for displaying the correct date in table format
      * on the display. It takes the week number for that month as well as  the day of the week as
      * a number and returns the corresponding date
      */
@@ -139,6 +139,7 @@ export class CalendarComponent implements OnInit, AfterViewInit {
    }
 
 //    selectDay takes in the day from the div tag in the table and sets the selected day to that value
+
     public selectDay(date: Date) {
         
         this.calendarService.selectDate(date); // Pushes the selected Date to the observable
@@ -168,7 +169,7 @@ export class CalendarComponent implements OnInit, AfterViewInit {
             givenDate.getFullYear() === this.selectedDate.getFullYear();
     }
 
-
+   
 
 
 }

@@ -3,7 +3,7 @@
         <h2 class="month">{{months[calendarService.displayDate.getMonth()]}}</h2>
         <h2 class="year">{{calendarService.displayDate.getFullYear()}}</h2>
         <button id="nextBtn" class="btn pull-right" (click)=nextMonth()>&gt;</button>
-        <button id="prevBtn" class="btn pull-right" (click)=prevMonth()>&lt;</button> 
+        <button id="prevBtn" class="btn pull-right" (click)=prevMonth()>&lt;</button>
     </header>
 
     <table>
@@ -23,6 +23,7 @@
         </tr>
 
     </table>
+
     
    
      <calendar-form 
@@ -41,3 +42,24 @@
       <app-event-list [selectedDate]="selectedDate" (selectedEventRequest)="selectEvent($event)"></app-event-list>
   </span>
 </div> 
+
+
+
+<div class="sidebar">
+  <!-- <span style="float:right; display:inline; position:relative;"> -->
+      <app-event-list [weekEvents]="weekEvents | async" [selectedDate]="selectedDate"></app-event-list>
+  <!-- </span> -->
+</div>
+
+
+
+
+<div class="form">
+  <calendar-form></calendar-form>
+</div>
+
+     <div>
+        <p>TODO: Remove This</p>
+        <p>Calendar Component SelectedDate: {{selectedDate}}</p>
+     </div>
+
