@@ -53,6 +53,8 @@
 
     <button type="submit" class="btn btn-success" [disabled]="!calendarForm.form.valid">Submit</button>
 
+    <button type="button" class="btn btn-danger" (click)="deleteEvent(selectedEvent); calendarForm.reset()">Delete Event</button>
+
     <div>
         TODO: remove this: 
         <br>

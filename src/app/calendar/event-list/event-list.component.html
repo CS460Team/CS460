@@ -1,6 +1,6 @@
 <div class="calendarList">
   <ul>
-    <li *ngFor="let event of weekEvents">
+    <li  *ngFor="let event of calendarService.eventsObservable | async | weekEvents: selectedDate" (click)=selectEvent(event)>
       {{event.title}}
       </li>
   </ul>

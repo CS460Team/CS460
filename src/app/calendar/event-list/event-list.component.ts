@@ -1,4 +1,9 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
+
+import { Observable } from 'rxjs/observable';
+
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/do';
 
 import { CalendarEvent } from '../shared/calendar-event';
 import { EventDataService } from '../shared/event-data.service';
@@ -11,15 +16,17 @@ import { CalendarService } from '../shared/calendar.service';
 })
 export class EventListComponent implements OnInit, OnChanges {
   /**
-   * I want to the eventListComponent to display the user's events for the week from the day they selected
+   * I want the eventListComponent to display the user's events for the week from the day they selected
    * on the calendar. The user should be able to click a particular date on the calendar and all events
    * between that date and a week from that date should be displayed. In order to do this I need something
    * to be able to track what day is actively selected by the user. This variable should be changed whenever
    * the user clicks a different date on the calendar.
    */
 
-   @Input() selectedDate: Date;
-  @Input() weekEvents: CalendarEvent[];
+  @Input() selectedDate: Date;
+  weekEvents: Observable <CalendarEvent[]>;
+  @Output() selectedEventRequest = new EventEmitter<CalendarEvent>();
+  calEvents: CalendarEvent[];
 
   constructor(private eventDataService: EventDataService, private calendarService: CalendarService) { }
 
@@ -29,6 +36,20 @@ export class EventListComponent implements OnInit, OnChanges {
     
     
   }
+selectEvent(event: CalendarEvent) {
+  const start = new Date(event.startDate);
+  const end = new Date(event.endDate);
+  const startdate = start.toISOString().slice(0,10);
+  const startTime = start.toISOString().slice(11,19);
+  const endDate = end.toISOString().slice(0,10);
+  const endTime = end.toISOString().slice(11,19);
+  event.startDate = startdate;
+  event.startTime = startTime;
+  event.endDate = endDate;
+  event.endTime = endTime;
+  this.selectedEventRequest.emit(event);
+  
+}
 
 ngOnChanges() {
   console.log('EventList Component: selectedDate = ' + this.selectedDate);
