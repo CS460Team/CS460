@@ -40,10 +40,12 @@
   </form>
 </div>
 
+<div class="notes">
     <div class="form-group">
         <label for="notes">Notes</label>
         <textarea rows="10" cols="10" class="form-control" id="notes" [(ngModel)]="model.notes" name="notes"></textarea>
     </div>
+</div>
 
     <button type="submit" class="btn btn-success" [disabled]="!calendarForm.form.valid">Submit</button>
 

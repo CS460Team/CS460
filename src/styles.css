@@ -31,7 +31,7 @@ table {
 td {
   border: 1px solid lightgrey;
   font-size: 11px;
- 
+
 }
 
 th {
@@ -47,6 +47,7 @@ th {
 button.btn {
   background-color: #99E1D9;
   font-weight: bold;
+  color:black;
 }
 
 #nextBtn {
@@ -55,6 +56,10 @@ button.btn {
 
 #prevBtn {
   margin-right: 2%;
+}
+
+button.btn.btn-danger {
+  background-color: #FF6347;
 }
 
 h2.year, button.btn {
@@ -104,10 +109,14 @@ label {
   padding-top: 5px;
 }
 
+#date {
+  padding-top: 5px;
+}
+
 legend {
   margin-top: 20px;
 }
 
-textarea {
-  margin-top: 20%;
+.notes {
+  margin-top: 9%;
 }

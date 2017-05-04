@@ -1,4 +1,4 @@
-td {
+/*td {
     padding-bottom: 0px;
     padding-right: 0px;
     padding-left: 0px;
@@ -7,8 +7,10 @@ td {
 .day-container {
     width: 100%;
     height: 100%;
-}
+}*/
 
-.selected {
-    background-color: blue;
-}
+/*div.selected {
+    background-color: pink;
+    width: 100%;
+    height: 100%;
+}*/
