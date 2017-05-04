@@ -15,51 +15,24 @@
                 (dateSelectedRequest) = "selectDay($event)"
                 *ngIf="isValidDate(calculateDate(week, date))"
                 [givenDay]="calculateDate(week, date)"
+                [selectedDate]="calendarService.dateSelected | async"
+                [allEvents]="calendarService.eventsObservable | async"
+                [displayDate]="calendarService.displayDate"
                 ></app-day>
-                <!--<div  class="day-container" #dateElement [class.selected]="isSelected(dateElement.innerText)" (click) = "selectDay(+(dateElement.innerText))"  *ngIf="isValidDate(calculateDate(week, date))">
-                {{calculateDate(week, date)}}
-                </div>-->
                 </td>
         </tr>
 
     </table>
+<div class="sidebar">
+      <app-event-list [selectedDate]="selectedDate" (selectedEventRequest)="selectEvent($event)"></app-event-list>
+</div> 
 
-    
-   
+   <div class="form">
      <calendar-form 
      [selectedEvent]="selectedEvent" 
      (deleteRequest)="deleteEvent($event)" 
      (addEventRequest)="addEvent($event)"></calendar-form> 
-     <div>
-        <p>TODO: Remove This</p>
-        <p>Calendar Component SelectedDate: {{selectedDate}}</p>    
-     </div>
-     
+   </div>
 </div>
 
-<div class="sidebar">
-  <span style="float:right; display:inline; position:relative;">
-      <app-event-list [selectedDate]="selectedDate" (selectedEventRequest)="selectEvent($event)"></app-event-list>
-  </span>
-</div> 
-
-
-
-<div class="sidebar">
-  <!-- <span style="float:right; display:inline; position:relative;"> -->
-      <app-event-list [weekEvents]="weekEvents | async" [selectedDate]="selectedDate"></app-event-list>
-  <!-- </span> -->
-</div>
-
-
-
-
-<div class="form">
-  <calendar-form></calendar-form>
-</div>
-
-     <div>
-        <p>TODO: Remove This</p>
-        <p>Calendar Component SelectedDate: {{selectedDate}}</p>
-     </div>
 

@@ -48,29 +48,4 @@
     <button type="submit" class="btn btn-success" [disabled]="!calendarForm.form.valid">Submit</button>
 
     <button type="button" class="btn btn-danger" (click)="deleteEvent(selectedEvent); calendarForm.reset()">Delete Event</button>
-
-    <div>
-        TODO: remove this:
-        <br>
-        title: {{model.title}}
-        <br>
-        startDate: {{model.startDate}}
-        <br>
-        startTime: {{model.startTime}}
-        <br>
-        startDateTime: {{model.startDate + model.startTime}}
-        <br>
-        endDate: {{model.endDate}}
-        <br>
-        endTime: {{model.endTime}}
-        <br>
-        notes: {{model.notes}}
-    </div>
-    <br>
-    --------------------Change Log------------------
-    <br>
-    {{changelog}}
-    <br>
-    ------------------------------------------------
-    <br>
 </form>

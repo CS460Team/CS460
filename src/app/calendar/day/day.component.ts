@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 
 import { CalendarService } from '../shared/calendar.service';
+import { CalendarEvent} from '../shared/calendar-event';
 
 @Component({
   selector: 'app-day',
@@ -10,44 +11,58 @@ import { CalendarService } from '../shared/calendar.service';
 export class DayComponent implements OnInit, OnChanges {
 
   @Input() givenDay: number;
-  selectedDate: Date;
+  @Input() selectedDate: Date;
   @Output() dateSelectedRequest: EventEmitter<Date> = new EventEmitter<Date>();
+  @Input() allEvents: CalendarEvent[];
+  @Input() displayDate: Date;
+  hasEvents: boolean;
   isSelected: boolean;
   constructor(private calendarService: CalendarService) { }
 
   ngOnInit() {
+    this.isSelected = this.checkIsSelected();
     
-    
-    this.calendarService.dateSelected.subscribe(
-      (date: Date ) => {
-        this.selectedDate = date;
-        console.log('date set to: ', this.selectedDate);
-        this.isSelected = this.checkIsSelected();
-      }
-      );
-      
   }
   ngOnChanges() {
     
     this.isSelected = this.checkIsSelected();
+    this.hasEvents = this.checkEvents();
+    console.log('hasEvents: ', this.hasEvents);
   }
 
   selectDate(day: number) {
     const selectedDate = new Date(
-      this.calendarService.displayDate.getFullYear(),
-      this.calendarService.displayDate.getMonth(), 
+      this.displayDate.getFullYear(),
+      this.displayDate.getMonth(), 
       day);
       this.dateSelectedRequest.emit(selectedDate);
-      console.log('You changed the date to ', selectedDate);
+      
   }
   checkIsSelected(): boolean {
-    console.log('value of selectedDate = ', this.selectedDate);
+    
     if (!!this.selectedDate) {
-      return this.selectedDate.getFullYear() === this.calendarService.displayDate.getFullYear()
-            && this.selectedDate.getMonth() === this.calendarService.displayDate.getMonth()
+      return this.selectedDate.getFullYear() === this.displayDate.getFullYear()
+            && this.selectedDate.getMonth() === this.displayDate.getMonth()
             && this.selectedDate.getDate() === this.givenDay;
     }
     return false;
+  }
+
+  checkEvents(): boolean {
+   
+    
+    if (!!this.allEvents) {
+    return this.allEvents.some(
+      (value: CalendarEvent, index: number, array: CalendarEvent[]) => {
+        const start = new Date(value.startDate);
+        
+        return start.getFullYear() === this.displayDate.getFullYear()
+            && start.getMonth() === this.displayDate.getMonth()
+            && start.getDate() === this.givenDay;
+      }
+    )
+  }
+  return false;
   }
 
 }

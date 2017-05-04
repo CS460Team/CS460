@@ -31,18 +31,22 @@ export class EventListComponent implements OnInit, OnChanges {
   constructor(private eventDataService: EventDataService, private calendarService: CalendarService) { }
 
   ngOnInit() {
-    
-    
-    
-    
   }
 selectEvent(event: CalendarEvent) {
+  
+  if (!event.endDate) {
+    event.endDate = event.startDate;
+  }
   const start = new Date(event.startDate);
   const end = new Date(event.endDate);
-  const startdate = start.toISOString().slice(0,10);
-  const startTime = start.toISOString().slice(11,19);
-  const endDate = end.toISOString().slice(0,10);
-  const endTime = end.toISOString().slice(11,19);
+  const indexOfTStart = start.toISOString().indexOf('T');
+  const indexOfPeriodStart = start.toISOString().indexOf('.');
+  const indexOfTEnd = end.toISOString().indexOf('T');
+  const indexOfPeriodEnd = end.toISOString().indexOf('.');
+  const startdate = start.toISOString().slice(0,indexOfTStart);
+  const startTime = start.toISOString().slice(indexOfTStart + 1, indexOfPeriodStart);
+  const endDate = end.toISOString().slice(0,indexOfTEnd);
+  const endTime = end.toISOString().slice(indexOfTEnd + 1, indexOfPeriodEnd);
   event.startDate = startdate;
   event.startTime = startTime;
   event.endDate = endDate;
