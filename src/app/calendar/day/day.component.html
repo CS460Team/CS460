@@ -1,0 +1,6 @@
+<div [class.selected]="isSelected" (click)="selectDate(givenDay)">
+  {{givenDay}}
+  <div *ngIf="hasEvents">
+    &#x2605;
+  </div>
+</div>

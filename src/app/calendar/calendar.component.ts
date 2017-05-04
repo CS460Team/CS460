@@ -27,11 +27,13 @@ const months: string[] = [
 
 @Component({
     selector: 'app-calendar',
-    templateUrl: './calendar.component.html'
+    templateUrl: './calendar.component.html',
+    styleUrls: ['calendar.component.css']
+    
 })
 export class CalendarComponent implements OnInit, AfterViewInit {
 
-
+    selectedEvent:  CalendarEvent;
     startDay: number;       // The day of week that the month starts on
     currentMonth: number;   // The currently selected Month by the User
     currentYear: number;    // The currently selected Year by the user
@@ -43,6 +45,7 @@ export class CalendarComponent implements OnInit, AfterViewInit {
 
     weekEvents: Promise<CalendarEvent[]>;
 
+    allEvents: CalendarEvent[];
 
 
     constructor(private calendarService: CalendarService, private dataService: EventDataService) {}
@@ -52,6 +55,7 @@ export class CalendarComponent implements OnInit, AfterViewInit {
      * service's displayDate to be the month that should be on display to the user
      */
     ngOnInit(): void {
+        console.log('Calendar component: Initialization in process');
         this.days = days;
         this.months = months;
 
@@ -60,11 +64,22 @@ export class CalendarComponent implements OnInit, AfterViewInit {
         // added to the stream (E.g. The date selected by the user) and set
         // the class variable to be that value
         this.calendarService.dateSelected.subscribe(
-            selected => this.selectedDate = selected
+            selected => {
+                this.selectedDate = selected;
+                console.log('setting date selected is complete');
+            }
         );
 
+        this.calendarService.eventsObservable.subscribe(
+            events => {
+                this.allEvents = events;
+                console.log('calendar component Initialization: allEvents = ' + this.allEvents);
+            },
+            error => console.error('Something screwy happened ', error),
+            () => console.log('calendarService completed')
+        );
         // --------------------------------------------------------------
-
+        console.log('Calendar Component: Initialization: allEvents should be subscribed by now');
         this.currentMonth = this.calendarService.today.getMonth();
         this.currentYear = this.calendarService.today.getFullYear();
         // Sets the display date to the first of the month
@@ -74,7 +89,7 @@ export class CalendarComponent implements OnInit, AfterViewInit {
 
         this.startDay = this.calendarService.displayDate.getDay();
 
-        this.selectDay(this.calendarService.today.getDate() + '');
+        this.selectDay(this.calendarService.today);
     }
     ngAfterViewInit() {
          this.calendarService.selectDate(this.calendarService.today);
@@ -124,16 +139,37 @@ export class CalendarComponent implements OnInit, AfterViewInit {
    }
 
 //    selectDay takes in the day from the div tag in the table and sets the selected day to that value
-    public selectDay(day: string) {
-        const currentMonth = this.calendarService.displayDate.getMonth();
-        const currentYear = this.calendarService.displayDate.getFullYear();
-        const selectedDay = +day;
-        const selectedDate = new Date(currentYear, currentMonth, selectedDay);
-        this.calendarService.selectDate(selectedDate); // Pushes the selected Date to the observable
-        this.weekEvents = this.dataService.getEventsRange(selectedDate.getTime(),(selectedDate.getTime() + 7 * 24 * 60 * 60 * 1000));
 
+    public selectDay(date: Date) {
+        
+        this.calendarService.selectDate(date); // Pushes the selected Date to the observable
+        
+      
 
     }
+
+    selectEvent(event: CalendarEvent) {
+        this.selectedEvent = event;
+    }
+
+    deleteEvent(event: CalendarEvent) {
+        this.dataService.deleteEvent(event).subscribe();
+    }
+
+    addEvent(event: CalendarEvent) {
+        this.dataService.addEvent(event);
+    }
+
+    isSelected(date: string): boolean {
+        const givenDate = new Date(this.calendarService.displayDate.getFullYear(),
+        this.calendarService.displayDate.getMonth(), 
+        parseInt(date, 10));
+        return givenDate.getDate() === this.selectedDate.getDate() &&
+            givenDate.getMonth() === this.selectedDate.getMonth() &&
+            givenDate.getFullYear() === this.selectedDate.getFullYear();
+    }
+
+   
 
 
 }

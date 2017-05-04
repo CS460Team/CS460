@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { OnChanges, SimpleChanges } from '@angular/core';
 
@@ -9,7 +9,7 @@ import { EventDataService } from '../shared/event-data.service';
     selector: 'calendar-form',
     templateUrl: './calendar-form.component.html'
 })
-export class CalendarFormComponent implements OnInit {
+export class CalendarFormComponent implements OnInit, OnChanges {
     /**CalendarFormComponent should allow the user to enter events on specified days
      * When the user is ready to add an event they should be able to hit the submit 
      * button and the event will be added to the database. 
@@ -19,7 +19,9 @@ export class CalendarFormComponent implements OnInit {
      */
 
     model: CalendarEvent = new CalendarEvent();
-    
+    @Input() selectedEvent: CalendarEvent;
+    @Output() deleteRequest = new EventEmitter<CalendarEvent>();
+    @Output() addEventRequest = new EventEmitter<CalendarEvent>();
     changelog: string[] = [];
 
 
@@ -28,7 +30,8 @@ export class CalendarFormComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.model.title = 'My Event';
+        if (!this.selectedEvent) {
+            this.model.title = 'My Event';
         this.model.startDate = this.calendarService.today.getFullYear() + 
             '-' + ('0'+(this.calendarService.today.getMonth() + 1)).slice(-2) +
             '-' + this.calendarService.today.getDate();
@@ -40,7 +43,29 @@ export class CalendarFormComponent implements OnInit {
             '-' + this.calendarService.today.getDate();
         this.model.endTime = (this.calendarService.today.getHours() + 1) + 
             ':' + this.calendarService.today.getMinutes();
+        }
+        else {
+            this.model.title = this.selectedEvent.title;
+            this.model.startDate = this.selectedEvent.startDate;
+            this.model.startTime = this.selectedEvent.startTime;
+            this.model.endDate = this.selectedEvent.endDate;
+            this.model.endTime = this.selectedEvent.endTime;
+            this.model.notes = this.selectedEvent.notes;
+        }
+        
 
+    }
+
+    ngOnChanges() {
+            if(!!this.selectedEvent) {
+                this.model.title = this.selectedEvent.title;
+            this.model.startDate = this.selectedEvent.startDate;
+            this.model.startTime = this.selectedEvent.startTime;
+            this.model.endDate = this.selectedEvent.endDate;
+            this.model.endTime = this.selectedEvent.endTime;
+            this.model.notes = this.selectedEvent.notes;
+            }
+            
     }
 
     public logModel(): void {
@@ -48,34 +73,17 @@ export class CalendarFormComponent implements OnInit {
     }
 
    
-    public addEvent(eventDetails): void {
-        this.dataService.addEvent(eventDetails)
-            .then((calEvent: CalendarEvent) => console.log('Post successful: ', calEvent))
-            .catch((error: any) => console.error('An error occured: ', error));
+    public addEvent(event: CalendarEvent): void {
+        this.addEventRequest.emit(event);
+    }
+
+    deleteEvent(event: CalendarEvent) {
+        this.deleteRequest.emit(event);
     }
 
     public onSubmit(calendarForm: NgForm): void {
 
-        let calEvent: {
-            title: string,
-            location: string,
-            notes: string,
-            startDate: Date,
-            endDate: Date
-        }
-
-
-
-        calEvent = {
-            title: this.model.title,
-            location: '',
-            notes: this.model.notes,
-            startDate: new Date(this.model.startDate + " " + this.model.startTime),
-            endDate: new Date(this.model.endDate + " " + this.model.endTime)
-
-        };
-        console.log(calEvent);
-        this.addEvent(calEvent); //UNCOMMENT THIS WHEN DONE DEBUGGING
+         this.addEvent(this.model); //UNCOMMENT THIS WHEN DONE DEBUGGING
 
         // Done TODO: Make a data service that sends the model to Database
         // TODO: After model has been saved to the Database form values should be reset with calendarForm.reset()

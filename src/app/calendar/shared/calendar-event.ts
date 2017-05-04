@@ -1,4 +1,5 @@
 export class CalendarEvent {
+    _id: string;
     startDate: string;
     startDateType: any = typeof this.startDate;
     startTime: string;

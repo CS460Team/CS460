@@ -4,6 +4,9 @@ import {Observable} from 'rxjs/observable';
 import { Subject } from 'rxjs/subject';
 import { of } from 'rxjs/observable/of';
 
+import { CalendarEvent } from './calendar-event';
+import { EventDataService } from './event-data.service';
+
 @Injectable()
 export class CalendarService {
 
@@ -15,7 +18,33 @@ export class CalendarService {
     private selectedDateSource = new Subject<Date>();
 
     // Observable Date Streams; For reading from stream
-    dateSelected = this.selectedDateSource.asObservable();
+    dateSelected: Observable<Date>;
+
+   
+    public eventsObservable: Observable<CalendarEvent[]>;
+
+    constructor(private dataService: EventDataService) {
+        this.dateSelected = this.selectedDateSource.asObservable();
+        this.eventsObservable = this.dataService.eventsObservable;
+        this.dataService.getEvents().subscribe(
+            (events: CalendarEvent[]) => {
+                this.updateEvents(events);
+                console.log('Calendar Service: events successfully pushed to eventSource');
+            },
+            (error: any) => {
+                console.error('Calendar Service: something went wrong: ', error);
+            },
+            () => {
+                console.log('Calendar Service: events subscription has been completed');
+            }
+            );
+        
+        
+    }
+
+    updateEvents(events: CalendarEvent[]) {
+        this.dataService.updateSource(events);
+    }
 
     // Service method to write a new date to the subject
     selectDate(date: Date) {
